@@ -1,6 +1,7 @@
 package org.codechimp.androidfortunes;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,9 +17,30 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
     @InjectView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @InjectView(R.id.content) TextView contentTextView;
 
+    Quote currentQuote;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeUI();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        swipeLayout.setRefreshing(true);
+        new GetRandomQuoteTask().execute();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        initializeUI();
+    }
+
+    private void initializeUI() {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
@@ -28,8 +50,8 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        swipeLayout.setRefreshing(true);
-        new GetRandomQuoteTask().execute();
+        if (currentQuote != null)
+            contentTextView.setText(currentQuote.getContent());
     }
 
     @Override
@@ -68,7 +90,9 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
         protected void onPostExecute(Quote result) {
             swipeLayout.setRefreshing(false);
 
-            contentTextView.setText(result.getContent());
+            currentQuote = result;
+
+            contentTextView.setText(currentQuote.getContent());
         }
     }
 }
