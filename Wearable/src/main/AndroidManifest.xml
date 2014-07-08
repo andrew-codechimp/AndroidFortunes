@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.example.android.wearable.delayedconfirmation" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.codechimp.androidfortunes" >
 
     <uses-sdk android:minSdkVersion="20" android:targetSdkVersion="20" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
 
     <application
             android:allowBackup="true"

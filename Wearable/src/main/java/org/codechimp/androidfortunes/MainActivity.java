@@ -1,4 +1,4 @@
-package com.example.android.wearable.delayedconfirmation;
+package org.codechimp.androidfortunes;
 
 import android.app.Activity;
 import android.app.Notification;
