@@ -1,1 +1,1 @@
-include ':AndroidFortunes'
+include ':Application', ':Wearable'
