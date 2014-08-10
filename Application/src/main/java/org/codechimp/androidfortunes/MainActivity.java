@@ -50,10 +50,10 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
         ButterKnife.inject(this);
 
         swipeLayout.setOnRefreshListener(this);
-        swipeLayout.setColorSchemeColors(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        swipeLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_blue_bright),
+                getResources().getColor(android.R.color.holo_green_light),
+                getResources().getColor(android.R.color.holo_orange_light),
+                getResources().getColor(android.R.color.holo_red_light));
 
         if (currentQuote != null)
             contentTextView.setText(currentQuote.getContent());
