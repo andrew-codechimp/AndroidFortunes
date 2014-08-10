@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.codechimp.androidfortunes" >
-
-    <uses-sdk android:minSdkVersion="20" android:targetSdkVersion="20" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.codechimp.androidfortunes" >
 
     <uses-feature android:name="android.hardware.type.watch" />
+
+    <uses-sdk tools:node="replace" />
 
     <application
             android:allowBackup="true"
