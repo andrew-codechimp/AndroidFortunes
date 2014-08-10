@@ -23,6 +23,8 @@ android {
     }
 }
 
+project.archivesBaseName = "AndroidFortunes";
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:support-v4:20.0.+"
