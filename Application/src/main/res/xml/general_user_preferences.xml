@@ -2,8 +2,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings">
     <CheckBoxPreference
-        android:key="prefDailyWear"
+        android:key="prefDaily"
         android:defaultValue="true"
-        android:summary="@string/daily_wear_summary"
-        android:title="@string/daily_wear" />
+        android:summary="@string/daily_summary"
+        android:title="@string/daily" />
 </PreferenceScreen>

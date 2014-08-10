@@ -23,7 +23,7 @@ public class AlarmHelper {
                 .getDefaultSharedPreferences(context);
 
         boolean prefDailyAlarm = sp.getBoolean(
-                "prefDailyWear", true);
+                "prefDaily", true);
 
         if (prefDailyAlarm) {
             Calendar calendar = Calendar.getInstance();

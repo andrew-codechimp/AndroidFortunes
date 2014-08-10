@@ -11,8 +11,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        if(GeneralUserPreferencesFragment.class.getName().equals(fragmentName)) return true;
-        return false;
+        return GeneralUserPreferencesFragment.class.getName().equals(fragmentName);
     }
 
     @Override

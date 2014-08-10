@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import butterknife.InjectView;
 
 public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String TAG = "MainActivity";
     private static final int SHOW_SETTINGS = 12;
 
     @InjectView(R.id.swipe_container)
@@ -52,7 +50,7 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
         ButterKnife.inject(this);
 
         swipeLayout.setOnRefreshListener(this);
-        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+        swipeLayout.setColorSchemeColors(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
@@ -75,20 +73,22 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent i = new Intent(this, SettingsActivity.class);
-            i.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT,
-                    GeneralUserPreferencesFragment.class.getName());
-            i.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
+        switch (item.getItemId()) {
+            case R.id.action_towear:
+                if (currentQuote != null)
+                    NotifyHelper.Notify(this, currentQuote.getContent());
+                return true;
+            case R.id.action_settings:
+                Intent i = new Intent(this, SettingsActivity.class);
+                i.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT,
+                        GeneralUserPreferencesFragment.class.getName());
+                i.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
 
-            startActivityForResult(i, SHOW_SETTINGS);
-            return true;
+                startActivityForResult(i, SHOW_SETTINGS);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
     private class GetRandomQuoteTask extends AsyncTask<Void, Void, Quote> {
         @Override
         protected Quote doInBackground(Void... params) {
-            Quote q = null;
+            Quote q;
             q = CloudyFortunesClient.getCloudyFortunesApiClient().randomQuote();
             return q;
         }

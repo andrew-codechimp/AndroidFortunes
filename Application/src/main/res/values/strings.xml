@@ -4,7 +4,8 @@
     <string name="app_name">Fortunes</string>
     <string name="content">Cloudy Fortunes!</string>
     <string name="settings">Settings</string>
-    <string name="daily_wear">Wear Notification</string>
-    <string name="daily_wear_summary">Show a quote on your wear device every day</string>
+    <string name="to_wear">To Wear</string>
+    <string name="daily">Notification</string>
+    <string name="daily_summary">Show a quote every day</string>
 
 </resources>

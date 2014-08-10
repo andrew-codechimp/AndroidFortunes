@@ -1,9 +1,6 @@
 package org.codechimp.androidfortunes;
 
-import retrofit.ErrorHandler;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class CloudyFortunesClient {
     private static CloudyFortunesApiInterface CloudyFortunesService;

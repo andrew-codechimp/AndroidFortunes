@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import org.codechimp.util.WakeLock;
+
 public class AlarmReceiver extends BroadcastReceiver {
     private static final String TAG = "AlarmReceiver";
 
@@ -12,7 +14,14 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG, "Alarm Received");
 
-        NotifyHelper.Notify(context, context.getString(R.string.app_name),
-                "Medication now due");
+        WakeLock.acquire(context);
+
+        Quote q;
+        q = CloudyFortunesClient.getCloudyFortunesApiClient().randomQuote();
+
+        if (q != null)
+            NotifyHelper.Notify(context, q.getContent());
+
+        WakeLock.release();
     }
 }
