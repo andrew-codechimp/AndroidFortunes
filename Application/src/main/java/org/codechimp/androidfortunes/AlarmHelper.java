@@ -28,6 +28,7 @@ public class AlarmHelper {
         if (prefDailyAlarm) {
             Calendar calendar = Calendar.getInstance();
             // 9 AM
+            calendar.add(Calendar.DATE, 1);  // Tomorrow
             calendar.set(Calendar.HOUR_OF_DAY, 9);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
@@ -49,8 +50,9 @@ public class AlarmHelper {
     }
 
     private static PendingIntent getPendingIntent(Context context) {
-        Intent i = new Intent(context, AlarmReceiver.class);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.setAction("org.codechimp.androidfortunes.alarm");
 
-        return (PendingIntent.getBroadcast(context, 0, i, 0));
+        return (PendingIntent.getBroadcast(context, 0, intent, 0));
     }
 }
