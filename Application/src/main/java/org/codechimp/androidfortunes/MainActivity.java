@@ -29,6 +29,8 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeUI();
+
+        AlarmHelper.setDailyAlarm(this);
     }
 
     @Override

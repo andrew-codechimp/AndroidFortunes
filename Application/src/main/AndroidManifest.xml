@@ -25,6 +25,14 @@
             android:name=".SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName="org.codechimp.androidfortunes.MainActivity" />
+
+        <receiver android:name=".OnBootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".AlarmReceiver" >
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
