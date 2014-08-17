@@ -20,8 +20,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         WakeLock.acquire(context);
 
         new GetRandomQuoteTask().execute();
-
-        WakeLock.release();
     }
 
     private class GetRandomQuoteTask extends AsyncTask<Void, Void, Quote> {
@@ -36,6 +34,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         protected void onPostExecute(Quote result) {
             if (result != null)
                 NotifyHelper.Notify(context, result.getContent());
+
+            WakeLock.release();
         }
     }
 }

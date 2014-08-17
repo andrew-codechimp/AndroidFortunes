@@ -1,6 +1,5 @@
 package org.codechimp.androidfortunes;
 
-
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 

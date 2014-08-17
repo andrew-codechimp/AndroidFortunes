@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import org.codechimp.util.TimePreference;
+
 public class AlarmHelper {
 
     private static final String TAG = "AlarmHelper";
@@ -26,11 +28,14 @@ public class AlarmHelper {
                 "prefDaily", true);
 
         if (prefDailyAlarm) {
+            String prefTime = sp.getString("prefTime", "08:00");
+            int hour = TimePreference.getHour(prefTime);
+            int minute = TimePreference.getMinute(prefTime);
+
             Calendar calendar = Calendar.getInstance();
-            // 9 AM
             calendar.add(Calendar.DATE, 1);  // Tomorrow
-            calendar.set(Calendar.HOUR_OF_DAY, 9);
-            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, minute);
             calendar.set(Calendar.SECOND, 0);
 
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

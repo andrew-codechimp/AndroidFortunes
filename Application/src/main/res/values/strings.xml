@@ -7,5 +7,5 @@
     <string name="to_wear">To Wear</string>
     <string name="daily">Notification</string>
     <string name="daily_summary">Show a quote every day</string>
-
+    <string name="time">Time</string>
 </resources>
