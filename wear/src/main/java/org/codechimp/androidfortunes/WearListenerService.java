@@ -1,6 +1,10 @@
 package org.codechimp.androidfortunes;
 
+import android.app.Notification;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -12,10 +16,10 @@ import com.google.android.gms.wearable.WearableListenerService;
 public class WearListenerService extends WearableListenerService {
 
     private static final String TAG = "WearListenerService";
-    private static final int TIMEOUT_MS = 100;
     private GoogleApiClient googleApiClient;
 
     private static final String MSG_QUOTE = "/quote";
+    public static final int NOTIFICATION_ID = 10002;
 
     @Override
     public void onCreate() {
@@ -61,7 +65,25 @@ public class WearListenerService extends WearableListenerService {
 
             String quote = new String(data);
 
-            //TODO - create a notification for the quote
+            showNotification(this, quote);
         }
+    }
+
+    private static void showNotification(Context context, String quote) {
+        NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
+        bigStyle.bigText(quote);
+
+        Notification notificationBuilder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(context.getString(R.string.app_name))
+                        .setContentText(quote)
+                        .setStyle(bigStyle)
+                        .build();
+
+        NotificationManagerCompat notificationManager =
+                NotificationManagerCompat.from(context);
+
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder);
     }
 }
