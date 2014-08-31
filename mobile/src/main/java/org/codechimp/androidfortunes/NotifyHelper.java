@@ -81,7 +81,7 @@ public class NotifyHelper {
                 })
                 .addApi(Wearable.API)
                 .build();
-        googleApiClient.connect();
+        googleApiClient.blockingConnect();
 
         PendingResult<NodeApi.GetConnectedNodesResult> nodes =
                 Wearable.NodeApi.getConnectedNodes(googleApiClient);

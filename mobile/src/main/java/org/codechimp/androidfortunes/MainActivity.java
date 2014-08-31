@@ -77,8 +77,16 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_towear:
-                if (currentQuote != null)
-                    NotifyHelper.sendMessageToWear(this, currentQuote.getContent());
+                if (currentQuote != null) {
+
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            NotifyHelper.sendMessageToWear(getBaseContext(), currentQuote.getContent());
+                        }
+                    };
+                    new Thread(runnable).start();
+                }
                 return true;
             case R.id.action_settings:
                 Intent i = new Intent(this, SettingsActivity.class);
