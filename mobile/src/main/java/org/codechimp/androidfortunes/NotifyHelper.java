@@ -19,6 +19,9 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import static android.support.v4.app.NotificationCompat.Builder;
 
 public class NotifyHelper {
@@ -83,24 +86,16 @@ public class NotifyHelper {
                 .build();
         googleApiClient.blockingConnect();
 
-        PendingResult<NodeApi.GetConnectedNodesResult> nodes =
-                Wearable.NodeApi.getConnectedNodes(googleApiClient);
-        nodes.setResultCallback(new ResultCallback<NodeApi.GetConnectedNodesResult>() {
-            @Override
-            public void onResult(NodeApi.GetConnectedNodesResult result) {
-                for (Node node : result.getNodes()) {
-                    PendingResult<MessageApi.SendMessageResult> messageResult =
-                            Wearable.MessageApi.sendMessage(googleApiClient, node.getId(), MSG_QUOTE, quote.getBytes());
-                    messageResult.setResultCallback(new ResultCallback<MessageApi.SendMessageResult>() {
-                        @Override
-                        public void onResult(MessageApi.SendMessageResult sendMessageResult) {
-                            Status status = sendMessageResult.getStatus();
-                            Log.d(TAG, "Status: " + status.toString());
-                        }
-                    });
-                }
+
+        NodeApi.GetConnectedNodesResult nodes =
+                Wearable.NodeApi.getConnectedNodes(googleApiClient).await();
+        for (Node node : nodes.getNodes()) {
+            MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
+                    googleApiClient, node.getId(), MSG_QUOTE, quote.getBytes()).await();
+            if (!result.getStatus().isSuccess()) {
+                Log.e(TAG, "ERROR: failed to send Message: " + result.getStatus());
             }
-        });
+        }
 
         googleApiClient.disconnect();
     }
