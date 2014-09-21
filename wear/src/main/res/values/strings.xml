@@ -2,4 +2,5 @@
 <resources>
 
     <string name="app_name">Fortunes</string>
+    <string name="title_activity_wear">Fortunes</string>
 </resources>
