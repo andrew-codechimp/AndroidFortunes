@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "org.codechimp.androidfortunes"
         minSdkVersion 20
-        targetSdkVersion 20
+        targetSdkVersion 21
         versionName project.VERSION_NAME
         versionCode Integer.parseInt(project.VERSION_CODE)
     }
