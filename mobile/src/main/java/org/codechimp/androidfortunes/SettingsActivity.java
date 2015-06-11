@@ -1,35 +1,26 @@
 package org.codechimp.androidfortunes;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import java.util.List;
-
-public class SettingsActivity extends PreferenceActivity {
-
-    @Override
-    protected boolean isValidFragment(String fragmentName) {
-        return GeneralUserPreferencesFragment.class.getName().equals(fragmentName);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
+public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            try {
+                setSupportActionBar(toolbar);
+            } catch (Throwable t) {
+                // WTF SAMSUNG 4.2.2!
+            }
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public void onBuildHeaders(List<Header> target) {
-        loadHeadersFromResource(R.xml.preference_headers, target);
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
     }
 
     @Override

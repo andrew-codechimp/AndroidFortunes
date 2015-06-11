@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity" >
     <item android:id="@+id/action_towear"
-        android:icon="@drawable/ic_action_wear"
+        android:icon="@drawable/ic_action_watch"
         android:title="@string/to_wear"
         android:orderInCategory="1"
         android:showAsAction="always" />

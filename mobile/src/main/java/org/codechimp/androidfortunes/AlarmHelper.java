@@ -55,9 +55,8 @@ public class AlarmHelper {
     }
 
     private static PendingIntent getPendingIntent(Context context) {
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.setAction("org.codechimp.androidfortunes.alarm");
-
-        return (PendingIntent.getBroadcast(context, 0, intent, 0));
+        Intent i = new Intent(context, FortuneService.class);
+        i.setAction(FortuneService.ACTION_USER_NOTIFICATION);
+        return (PendingIntent.getService(context, 0, i, 0));
     }
 }
